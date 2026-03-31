@@ -7,3 +7,5 @@ build_log.txt
 build_debug.txt
 build_debug_verbose.txt
 tailwind_log.txt
+
+.vercel

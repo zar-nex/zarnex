@@ -43,6 +43,10 @@ export default function HeroSection() {
             <div className="w-px h-12 bg-accent/30" />
          </motion.div>
       </div>
+      
+      {/* Anchor Navigation Targets for Global Navbar */}
+      <div id="ecosystems" className="absolute top-[150vh] w-full invisible pointer-events-none" />
+      <div id="mission" className="absolute top-[1100vh] w-full invisible pointer-events-none" />
     </div>
   )
 }

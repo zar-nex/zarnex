@@ -32,7 +32,7 @@ export default function ValueProposition() {
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="text-5xl md:text-7xl font-bold tracking-tighter text-white"
+            className="text-5xl md:text-7xl font-bold tracking-tighter text-text-main"
           >
             Integrated <span className="text-gradient">Advantage.</span>
           </motion.h2>
@@ -48,7 +48,7 @@ export default function ValueProposition() {
 
         <div className="relative w-full max-w-6xl mx-auto py-20 px-8">
            {/* Connecting Line (Desktop) */}
-           <div className="absolute top-1/2 left-0 w-full h-px bg-white/5 -translate-y-1/2 hidden md:block z-0"></div>
+           <div className="absolute top-1/2 left-0 w-full h-px bg-black/5 -translate-y-1/2 hidden md:block z-0"></div>
            
            <div className="grid grid-cols-1 md:grid-cols-5 gap-20 md:gap-4 relative z-10">
              {steps.map((step, i) => (
@@ -62,13 +62,13 @@ export default function ValueProposition() {
                    <motion.div 
                     whileHover={{ scale: 1.1 }}
                     className={`w-20 h-20 rounded-2xl flex items-center justify-center transition-all duration-500 mb-10 relative z-10 shadow-2xl border-2 backdrop-blur-2xl ${
-                      hoveredStep === step.id ? 'bg-accent border-accent text-primary shadow-accent/40' : 'bg-white/5 border-white/10 text-accent'
+                      hoveredStep === step.id ? 'bg-accent border-accent text-primary shadow-accent/40' : 'bg-black/5 border-black/5 text-accent'
                    }`}>
                       {step.icon}
                    </motion.div>
 
                    <span className={`text-[10px] font-black tracking-[0.4em] uppercase transition-all duration-500 ${
-                      hoveredStep === step.id ? 'text-accent' : 'text-white/40'
+                      hoveredStep === step.id ? 'text-accent' : 'text-text-muted'
                    }`}>
                       {step.id}
                    </span>
@@ -93,12 +93,12 @@ export default function ValueProposition() {
                                  key={popup} 
                                  initial={{ x: -10 }} animate={{ x: 0 }}
                                  transition={{ delay: idx * 0.1 }}
-                                 className="bg-accent text-primary p-3 px-8 rounded-lg text-[10px] font-black tracking-[0.4em] shadow-[0_20px_40px_rgba(197,160,89,0.3)] whitespace-nowrap border border-white/20 uppercase"
+                                 className="bg-accent text-primary p-3 px-8 rounded-lg text-[10px] font-black tracking-[0.4em] shadow-[0_20px_40px_rgba(197,160,89,0.3)] whitespace-nowrap border border-black/10 uppercase"
                                >
                                   {popup}
                                </motion.div>
                             ))}
-                            <div className="w-4 h-4 bg-accent rotate-45 mt-[-10px] border-b border-r border-white/20"></div>
+                            <div className="w-4 h-4 bg-accent rotate-45 mt-[-10px] border-b border-r border-black/10"></div>
                          </motion.div>
                       </AnimatePresence>
                    )}
@@ -111,14 +111,14 @@ export default function ValueProposition() {
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-40 p-12 md:p-16 glass-navbar rounded-3xl border border-white/10 max-w-5xl mx-auto shadow-2xl flex flex-col md:flex-row items-center gap-16 relative overflow-hidden group"
+          className="mt-40 p-12 md:p-16 glass-navbar rounded-3xl border border-black/5 max-w-5xl mx-auto shadow-2xl flex flex-col md:flex-row items-center gap-16 relative overflow-hidden group"
         >
            <div className="absolute inset-0 bg-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none"></div>
            <div className="w-24 h-24 bg-accent/20 rounded-full flex items-center justify-center shrink-0 border border-accent/30 group-hover:scale-110 transition-transform duration-700">
               <Target className="w-12 h-12 text-accent" />
            </div>
            <div className="flex flex-col gap-6 relative z-10">
-              <h3 className="text-3xl font-bold text-white tracking-tight">Institutional Excellence</h3>
+              <h3 className="text-3xl font-bold text-text-main tracking-tight">Institutional Excellence</h3>
               <p className="text-text-muted text-lg font-light leading-relaxed">
                 We maintain institutional-grade excellence by internalizing specialized functions while retaining centralized strategic control. This dual-layered model across our ecosystems ensures optimal asset expansion and market performance.
               </p>

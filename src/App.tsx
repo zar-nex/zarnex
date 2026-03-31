@@ -37,7 +37,7 @@ function App() {
             >
                <div className="container flex justify-between items-center">
                   <Logo />
-                  <button onClick={() => setIsMenuOpen(false)} className="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center hover:bg-accent/20 transition-all border border-white/10">
+                  <button onClick={() => setIsMenuOpen(false)} className="w-12 h-12 bg-black/5 rounded-full flex items-center justify-center hover:bg-accent/20 transition-all border border-black/10">
                      <X className="w-6 h-6 text-accent" />
                   </button>
                </div>
@@ -96,7 +96,7 @@ function App() {
 
       {/* Global Indicator */}
       <div className="fixed left-8 bottom-8 z-50 hidden xl:block">
-         <div className="flex items-center gap-5 bg-primary/80 backdrop-blur-xl p-4 px-8 rounded-full border border-white/10 shadow-2xl">
+         <div className="flex items-center gap-5 bg-primary/80 backdrop-blur-xl p-4 px-8 rounded-full border border-black/5 shadow-xl">
             <div className="relative">
               <div className="w-2 h-2 rounded-full bg-accent animate-ping absolute inset-0"></div>
               <div className="w-2 h-2 rounded-full bg-accent relative"></div>
@@ -114,12 +114,12 @@ const Logo = () => (
    <a href="/" className="flex flex-col group no-underline relative">
      <div className="flex flex-col items-start gap-1">
        <div className="flex items-baseline gap-2">
-         <span className="text-3xl font-bold tracking-[0.2em] font-outfit uppercase leading-none text-white group-hover:text-accent transition-all duration-500">
-           Z<span className="text-accent">A</span>RNEX
+         <span className="text-3xl font-bold tracking-[0.2em] font-outfit uppercase leading-none text-accent transition-all duration-500 hover:text-text-main">
+           Z/\RNEX
          </span>
        </div>
        <div className="w-full h-px bg-gradient-to-r from-accent/50 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
-       <span className="text-[8px] tracking-[0.5em] font-black text-accent mt-1 uppercase opacity-80 group-hover:opacity-100 transition-opacity">
+       <span className="text-[8px] tracking-[0.5em] font-black text-text-muted mt-1 uppercase opacity-80 group-hover:opacity-100 transition-opacity">
          HOLDING COMPANY
        </span>
      </div>

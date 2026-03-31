@@ -32,7 +32,7 @@ export default function FormSection() {
                <motion.h2 
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                className="text-5xl md:text-7xl font-bold tracking-tighter text-white"
+                className="text-5xl md:text-7xl font-bold tracking-tighter text-text-main"
                >
                  Partner With <span className="text-gradient">ZARNEX.</span>
                </motion.h2>
@@ -51,24 +51,24 @@ export default function FormSection() {
                 whileHover={{ x: 10 }}
                 className="flex items-center gap-8 group"
                >
-                  <div className="w-16 h-16 bg-white/5 rounded-2xl flex items-center justify-center border border-white/10 group-hover:border-accent group-hover:text-accent transition-all duration-500 shadow-2xl">
+                  <div className="w-16 h-16 bg-black/5 rounded-2xl flex items-center justify-center border border-black/5 group-hover:border-accent group-hover:text-accent transition-all duration-500 shadow-2xl">
                      <Mail className="w-6 h-6" />
                   </div>
                   <div className="flex flex-col">
                      <span className="text-[10px] text-accent font-black uppercase tracking-[0.3em] mb-1">Corporate Enquiry</span>
-                     <span className="text-xl font-bold text-white group-hover:text-accent transition-colors">executive.office@zarnex.com</span>
+                     <span className="text-xl font-bold text-text-main group-hover:text-accent transition-colors">executive.office@zarnex.com</span>
                   </div>
                </motion.div>
                <motion.div 
                 whileHover={{ x: 10 }}
                 className="flex items-center gap-8 group"
                >
-                  <div className="w-16 h-16 bg-white/5 rounded-2xl flex items-center justify-center border border-white/10 group-hover:border-accent group-hover:text-accent transition-all duration-500 shadow-2xl">
+                  <div className="w-16 h-16 bg-black/5 rounded-2xl flex items-center justify-center border border-black/5 group-hover:border-accent group-hover:text-accent transition-all duration-500 shadow-2xl">
                      <Briefcase className="w-6 h-6" />
                   </div>
                   <div className="flex flex-col">
                      <span className="text-[10px] text-accent font-black uppercase tracking-[0.3em] mb-1">Investment Relations</span>
-                     <span className="text-xl font-bold text-white group-hover:text-accent transition-colors">+966 50 1990 007</span>
+                     <span className="text-xl font-bold text-text-main group-hover:text-accent transition-colors">+966 50 1990 007</span>
                   </div>
                </motion.div>
             </div>
@@ -76,7 +76,7 @@ export default function FormSection() {
             <motion.div 
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
-              className="mt-12 p-10 glass-navbar rounded-3xl border border-white/5 italic text-sm text-text-muted leading-relaxed font-light border-l-accent border-l-4"
+              className="mt-12 p-10 glass-navbar rounded-3xl border border-black/5 italic text-sm text-text-muted leading-relaxed font-light border-l-accent border-l-4"
             >
                "We specialize in the strategic internalization of high-value functions, creating resilient ecosystem systems that drive global market leadership."
             </motion.div>
@@ -123,7 +123,7 @@ export default function FormSection() {
                         className="form-input cursor-pointer appearance-none"
                       >
                          <option value="" disabled className="bg-primary">Select Targeted Sector</option>
-                         {sectors.map(s => <option key={s} value={s} className="bg-primary text-white">{s}</option>)}
+                         {sectors.map(s => <option key={s} value={s} className="bg-primary text-text-main">{s}</option>)}
                       </select>
                    </div>
 

@@ -19,7 +19,7 @@ export default function HeroSection() {
   })
 
   return (
-    <div ref={containerRef} className="relative h-[1200vh] bg-black">
+    <div ref={containerRef} className="relative h-[1200vh] bg-primary">
       {/* 3D Canvas Layer */}
       <div className="sticky top-0 h-screen w-full overflow-hidden">
         <Canvas shadows gl={{ antialias: true, alpha: false, stencil: false }}>
@@ -33,13 +33,13 @@ export default function HeroSection() {
       </div>
       
       {/* Scroll Hint for UX */}
-      <div className="absolute top-[90vh] left-1/2 -translate-x-1/2 text-white/20 pointer-events-none z-30">
+      <div className="absolute top-[90vh] left-1/2 -translate-x-1/2 text-text-muted/40 pointer-events-none z-30">
          <motion.div 
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
             className="flex flex-col items-center gap-2"
          >
-            <span className="text-[10px] uppercase tracking-[0.4em] font-black">Scroll to Traverse</span>
+            <span className="text-[10px] uppercase tracking-[0.4em] font-black tracking-widest text-text-muted">Scroll to Traverse</span>
             <div className="w-px h-12 bg-accent/30" />
          </motion.div>
       </div>

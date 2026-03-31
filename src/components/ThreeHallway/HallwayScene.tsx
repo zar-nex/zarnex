@@ -111,8 +111,8 @@ export function HallwayScene({ scrollProgress }: { scrollProgress: number }) {
       <directionalLight position={[0, 20, 5]} intensity={1} castShadow />
       
       {/* Atmosphere */}
-      <fog attach="fog" args={['#050505', 18, 100]} />
-      <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} />
+      <fog attach="fog" args={['#ffffff', 18, 100]} />
+      <Stars radius={100} depth={50} count={3000} factor={2} saturation={0} fade speed={1} />
 
       {/* Hallway Structure */}
       <group>
@@ -128,8 +128,8 @@ export function HallwayScene({ scrollProgress }: { scrollProgress: number }) {
             depthScale={1.2}
             minDepthThreshold={0.4}
             maxDepthThreshold={1.4}
-            color="#050505"
-            metalness={0.5}
+            color="#f5f5f7"
+            metalness={0.2}
             mirror={1}
           />
         </mesh>
@@ -137,17 +137,17 @@ export function HallwayScene({ scrollProgress }: { scrollProgress: number }) {
         {/* Ceiling */}
         <mesh rotation={[Math.PI / 2, 0, 0]} position={[0, HALL_H, -HALL_L / 2 + 5]}>
           <planeGeometry args={[HALL_W, HALL_L + 20]} />
-          <meshStandardMaterial color="#0a0a0a" roughness={1} />
+          <meshStandardMaterial color="#eeeeee" roughness={0.8} />
         </mesh>
 
         {/* Walls */}
         <mesh position={[-HALL_W / 2, HALL_H / 2, -HALL_L / 2 + 5]} rotation={[0, Math.PI / 2, 0]}>
           <planeGeometry args={[HALL_L + 20, HALL_H]} />
-          <meshStandardMaterial color="#080808" />
+          <meshStandardMaterial color="#e5e5ea" roughness={0.9} />
         </mesh>
         <mesh position={[HALL_W / 2, HALL_H / 2, -HALL_L / 2 + 5]} rotation={[0, -Math.PI / 2, 0]}>
           <planeGeometry args={[HALL_L + 20, HALL_H]} />
-          <meshStandardMaterial color="#080808" />
+          <meshStandardMaterial color="#e5e5ea" roughness={0.9} />
         </mesh>
 
         {/* Pillars */}
@@ -158,11 +158,11 @@ export function HallwayScene({ scrollProgress }: { scrollProgress: number }) {
               <group key={`p-${z}`}>
                 <mesh position={[-HALL_W / 2 + 1.2, HALL_H / 2, z]}>
                   <boxGeometry args={[0.55, HALL_H, 0.55]} />
-                  <meshStandardMaterial color="#111" metalness={0.8} roughness={0.2} />
+                  <meshStandardMaterial color="#d4af37" metalness={0.6} roughness={0.3} />
                 </mesh>
                 <mesh position={[HALL_W / 2 - 1.2, HALL_H / 2, z]}>
                   <boxGeometry args={[0.55, HALL_H, 0.55]} />
-                  <meshStandardMaterial color="#111" metalness={0.8} roughness={0.2} />
+                  <meshStandardMaterial color="#d4af37" metalness={0.6} roughness={0.3} />
                 </mesh>
               </group>
             )
@@ -191,28 +191,28 @@ export function HallwayScene({ scrollProgress }: { scrollProgress: number }) {
         <group position={[0, 0, 7.5]}>
            <mesh position={[0, HALL_H/2, 0]}>
               <boxGeometry args={[HALL_W + 1, HALL_H + 2, 0.5]} />
-              <meshStandardMaterial color="#050505" metalness={0.9} roughness={0.05} />
+              <meshStandardMaterial color="#ffffff" metalness={0.1} roughness={0.9} />
            </mesh>
            <Text
               position={[0, 4, 0.3]}
               fontSize={1.5}
-              color="#c5a059"
+              color="#d4af37"
               anchorX="center"
               anchorY="middle"
            >
-              ZARNEX HOLDING
+              Z/\RNEX HOLDING
            </Text>
            <Text
               position={[0, 2.5, 0.3]}
               fontSize={0.8}
-              color="#ffffff"
-              fillOpacity={0.5}
+              color="#86868b"
+              fillOpacity={0.8}
               anchorX="center"
               anchorY="middle"
            >
               BUILDING THE FUTURE.
            </Text>
-           <pointLight position={[0, 4, 1]} intensity={2} color="#c5a059" distance={10} />
+           <pointLight position={[0, 4, 1]} intensity={1} color="#d4af37" distance={10} />
         </group>
 
         {/* Zones */}

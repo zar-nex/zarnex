@@ -109,13 +109,13 @@ export default function HallwayOverlay({ scrollProgress }: { scrollProgress: num
       <div className="absolute top-32 left-12 flex flex-col gap-2">
          <span className="text-[10px] font-black tracking-[0.5em] text-accent uppercase">Ecological Infrastructure</span>
          <div className="flex items-center gap-4">
-            <span className="text-xl md:text-2xl font-bold tracking-widest text-white">SYSTEM STATUS: <span className="text-accent">SYNCHRONIZED</span></span>
+            <span className="text-xl md:text-2xl font-bold tracking-widest text-text-main">SYSTEM STATUS: <span className="text-accent">SYNCHRONIZED</span></span>
          </div>
       </div>
 
       {/* HUD: Sector Number */}
       <div className="absolute top-32 right-12 text-right flex flex-col gap-1 hidden md:flex">
-         <span className="text-7xl md:text-8xl font-black text-white/5 tracking-tighter leading-none">
+         <span className="text-7xl md:text-8xl font-black text-text-main/10 tracking-tighter leading-none">
             {activeZone !== -1 ? String(activeZone + 1).padStart(3, '0') : 'INIT'}
          </span>
          <span className="text-[9px] font-black tracking-[0.4em] text-accent uppercase mr-2">Target Sector Vector</span>
@@ -136,7 +136,7 @@ export default function HallwayOverlay({ scrollProgress }: { scrollProgress: num
                <span className="text-[10px] font-black tracking-[0.6em] text-accent uppercase bg-accent/10 p-2 px-6 rounded-full border border-accent/20">
                   Sector {activeZone + 1} &bull; {SUBS[activeZone].sub}
                </span>
-               <h2 className="text-7xl md:text-8xl font-bold tracking-tighter text-white" style={{ color: '#fff' }}>
+               <h2 className="text-7xl md:text-8xl font-bold tracking-tighter text-text-main">
                   {SUBS[activeZone].name.replace('\n', ' ')}
                </h2>
                <p className="text-lg font-light text-text-muted leading-relaxed uppercase tracking-[0.2em]">
@@ -166,18 +166,18 @@ export default function HallwayOverlay({ scrollProgress }: { scrollProgress: num
       <div className="absolute bottom-12 right-12 flex flex-col gap-2">
          <div className="flex items-center gap-10">
             <div className="flex flex-col text-right">
-               <span className="text-[9px] font-black text-white/30 uppercase tracking-[0.3em]">Depth Vector</span>
-               <span className="text-xl font-bold text-white tracking-widest">{String(Math.abs(Math.round(realZ))).padStart(5, '0')}z</span>
+               <span className="text-[9px] font-black text-text-muted/60 uppercase tracking-[0.3em]">Depth Vector</span>
+               <span className="text-xl font-bold text-text-main tracking-widest">{String(Math.abs(Math.round(realZ))).padStart(5, '0')}z</span>
             </div>
             <div className="flex flex-col text-right">
-               <span className="text-[9px] font-black text-white/30 uppercase tracking-[0.3em]">Operational Phase</span>
+               <span className="text-[9px] font-black text-text-muted/60 uppercase tracking-[0.3em]">Operational Phase</span>
                <span className="text-xl font-bold text-accent tracking-widest">{(scrollProgress * 100).toFixed(2)}%</span>
             </div>
          </div>
       </div>
 
       {/* Progress Line */}
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-white/5">
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-black/5">
          <motion.div 
             className="h-full bg-accent shadow-[0_0_20px_#c5a059]"
             animate={{ width: `${scrollProgress * 100}%` }}
@@ -189,8 +189,8 @@ export default function HallwayOverlay({ scrollProgress }: { scrollProgress: num
       <div className="absolute left-10 top-1/2 -translate-y-1/2 flex flex-col gap-6">
          {SUBS.map((s, i) => (
             <div key={s.id} className="flex items-center gap-4 group">
-               <div className={`w-1.5 h-1.5 rounded-full transition-all duration-500 ${activeZone === i ? 'bg-accent scale-[3] shadow-[0_0_10px_#c5a059]' : 'bg-white/20'}`} />
-               <span className={`text-[10px] font-black uppercase tracking-[0.3em] font-outfit transition-all duration-500 opacity-0 group-hover:opacity-100 ${activeZone === i ? 'text-accent opacity-100 translate-x-2' : 'text-white/40'}`}>
+               <div className={`w-1.5 h-1.5 rounded-full transition-all duration-500 ${activeZone === i ? 'bg-accent scale-[3] shadow-[0_0_10px_#d4af37]' : 'bg-black/10'}`} />
+               <span className={`text-[10px] font-black uppercase tracking-[0.3em] font-outfit transition-all duration-500 opacity-0 group-hover:opacity-100 ${activeZone === i ? 'text-accent opacity-100 translate-x-2' : 'text-text-muted'}`}>
                   {s.id}
                </span>
             </div>

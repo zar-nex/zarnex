@@ -111,18 +111,13 @@ function App() {
 }
 
 const Logo = () => (
-   <a href="/" className="flex flex-col group no-underline relative">
-     <div className="flex flex-col items-start gap-1">
-       <div className="flex items-baseline gap-2">
-         <span className="text-3xl font-bold tracking-[0.2em] font-outfit uppercase leading-none text-accent transition-all duration-500 hover:text-text-main">
-           Z/\RNEX
-         </span>
-       </div>
-       <div className="w-full h-px bg-gradient-to-r from-accent/50 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
-       <span className="text-[8px] tracking-[0.5em] font-black text-text-muted mt-1 uppercase opacity-80 group-hover:opacity-100 transition-opacity">
-         HOLDING COMPANY
-       </span>
-     </div>
+   <a href="/" className="flex items-center no-underline group">
+     <img
+       src="/zarnex-logo.png"
+       alt="ZARNEX Holding Company"
+       className="h-10 w-auto object-contain transition-all duration-500 group-hover:opacity-80"
+       style={{ maxWidth: '200px' }}
+     />
    </a>
 )
 

@@ -15,14 +15,14 @@ export default function Footer() {
       <div className="container relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-20 pb-24 border-b border-black/5">
           <div className="lg:col-span-1 flex flex-col gap-10">
-             <div className="flex flex-col items-start gap-2 group">
-                <span className="text-3xl font-black tracking-[0.2em] font-outfit uppercase leading-none text-accent transition-all duration-500">
-                  Z/\RNEX
-                </span>
-                <span className="text-[8px] tracking-[0.5em] font-black text-text-muted uppercase group-hover:text-accent transition-colors duration-500">
-                  HOLDING COMPANY
-                </span>
-             </div>
+             <a href="/" className="flex items-center no-underline group">
+                <img
+                  src="/zarnex-logo.png"
+                  alt="ZARNEX Holding Company"
+                  className="h-12 w-auto object-contain transition-all duration-500 group-hover:opacity-70"
+                  style={{ maxWidth: '220px' }}
+                />
+             </a>
              <p className="text-sm text-text-muted leading-relaxed font-light max-w-xs">
                 A premier global builder-operator platform orchestrating specialized intelligence and decentralized execution across 7 unique ecosystems.
              </p>

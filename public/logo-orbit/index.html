@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Logo Orbit</title>
+<style>
+  html,body{margin:0;height:100%;background:#6f5a45;overflow:hidden}
+  body{display:grid;place-items:center}
+  canvas{width:min(100vw,100vh);height:min(100vw,100vh);display:block}
+</style>
+</head>
+<body>
+<canvas id="c" width="1080" height="1080"></canvas>
+<script>
+// Logo layers cut from the artwork: the loop stays put, the orbit ring spins.
+const LOOP = 8;                       // seconds per cycle
+const SRC  = { w: 1060, h: 1020 };    // layer image size
+const PIVOT = { x: 508.5, y: 488.5 }; // orbit ring centre (layer coords)
+const TILT  = -3.8 * Math.PI / 180;   // ring major-axis angle
+const STAR  = { c: [738, 371], tips: [[743,291],[802,376],[716,433],[663,351]] };
+
+const cv = document.getElementById('c'), ctx = cv.getContext('2d');
+const S = 1080, K = 0.8;              // canvas size, logo scale
+const off = document.createElement('canvas'); off.width = off.height = S;
+const o = off.getContext('2d');
+
+const load = src => new Promise(r => { const i = new Image(); i.onload = () => r(i); i.src = src; });
+
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const seg = (t, a, b) => clamp((t - a) / (b - a));
+const inOut = x => x < .5 ? 4*x*x*x : 1 - Math.pow(-2*x + 2, 3) / 2;
+const outCubic = x => 1 - Math.pow(1 - x, 3);
+const bump = x => Math.sin(Math.PI * clamp(x));
+
+// film grain tile
+const grain = document.createElement('canvas'); grain.width = grain.height = 256;
+{ const g = grain.getContext('2d'), d = g.createImageData(256, 256); let s = 7;
+  for (let i = 0; i < d.data.length; i += 4) { s = (s * 16807) % 2147483647; const v = (s & 255);
+    d.data[i] = d.data[i+1] = d.data[i+2] = v > 128 ? 255 : 0; d.data[i+3] = 22; }
+  g.putImageData(d, 0, 0); }
+
+function starPath(c, s) {
+  const [cx, cy] = STAR.c, tips = STAR.tips;
+  c.beginPath();
+  tips.forEach((p, i) => {
+    const q = tips[(i + 1) % 4];
+    const mx = (p[0] + q[0]) / 2, my = (p[1] + q[1]) / 2;
+    const ctrl = [cx + (mx - cx) * .1, cy + (my - cy) * .1];
+    const P = [cx + (p[0] - cx) * s, cy + (p[1] - cy) * s];
+    const Q = [cx + (q[0] - cx) * s, cy + (q[1] - cy) * s];
+    const C = [cx + (ctrl[0] - cx) * s, cy + (ctrl[1] - cy) * s];
+    if (i === 0) c.moveTo(P[0], P[1]);
+    c.quadraticCurveTo(C[0], C[1], Q[0], Q[1]);
+  });
+  c.closePath();
+}
+
+let ring, loop;
+
+function ringAt(c, flip, spin, alpha) {
+  c.save();
+  c.globalAlpha = alpha;
+  c.translate(PIVOT.x, PIVOT.y);
+  c.rotate(spin);
+  c.rotate(TILT); c.scale(1, flip); c.rotate(-TILT);
+  c.translate(-PIVOT.x, -PIVOT.y);
+  c.drawImage(ring, 0, 0);
+  c.restore();
+}
+
+function render(t) {
+  t = ((t % LOOP) + LOOP) % LOOP;
+
+  // timeline
+  const intro = outCubic(seg(t, 0.0, 1.1));
+  const outro = 1 - inOut(seg(t, 7.4, 8.0));
+  const vis = intro * outro;
+  const fl = inOut(seg(t, 1.2, 3.6));             // 3D flip about the ring's long axis
+  const sp = inOut(seg(t, 4.2, 6.6));             // in-plane orbit spin
+  const phi = fl * Math.PI * 2;
+  const flip = Math.cos(phi);
+  const spin = sp * Math.PI * 2;
+  // angular speed (for motion trails)
+  const eps = 0.04;
+  const v = Math.max(
+    Math.abs(inOut(seg(t, 1.2, 3.6)) - inOut(seg(t - eps, 1.2, 3.6))) * Math.PI * 2,
+    Math.abs(inOut(seg(t, 4.2, 6.6)) - inOut(seg(t - eps, 4.2, 6.6))) * Math.PI * 2) / eps;
+  const trail = clamp(v / 5);
+
+  // background
+  const bg = ctx.createRadialGradient(S*.5, S*.45, 60, S*.5, S*.5, S*.78);
+  bg.addColorStop(0, '#a78f6c'); bg.addColorStop(1, '#7a634c');
+  ctx.globalCompositeOperation = 'source-over'; ctx.globalAlpha = 1;
+  ctx.fillStyle = bg; ctx.fillRect(0, 0, S, S);
+
+  // logo on offscreen layer
+  o.setTransform(1, 0, 0, 1, 0, 0);
+  o.clearRect(0, 0, S, S);
+  const sc = K * (0.86 + 0.14 * intro);
+  o.setTransform(sc, 0, 0, sc, S/2 - SRC.w*sc/2, S/2 - SRC.h*sc/2);
+  o.globalCompositeOperation = 'source-over';
+
+  o.globalAlpha = vis; o.drawImage(loop, 0, 0); o.globalAlpha = 1;
+
+  // ring motion trail
+  const dir = (t >= 4.2 ? 1 : 1);
+  for (let k = 3; k >= 1; k--) {
+    const d = k * 0.028;
+    const f2 = Math.cos((fl - Math.sign(1) * d * (t < 4 ? 1 : 0)) * Math.PI * 2);
+    const s2 = (sp - d * (t >= 4 ? 1 : 0)) * Math.PI * 2;
+    ringAt(o, t < 4 ? f2 : 1, t < 4 ? 0 : s2, vis * trail * 0.16 / k);
+  }
+  ringAt(o, Math.abs(flip) < .004 ? .004 : flip, spin, vis);
+
+  // star: negative space, with twinkles
+  const tw = Math.max(bump(seg(t, 0.9, 1.7)), bump(seg(t, 3.4, 4.2)), bump(seg(t, 6.6, 7.4)));
+  const sStar = 1 + 0.35 * tw;
+  o.globalCompositeOperation = 'destination-out';
+  o.globalAlpha = 1;
+  starPath(o, sStar); o.fill();
+  if (tw > 0.01) {                                 // thin rays
+    const [cx, cy] = STAR.c, L = 120 * tw;
+    o.save(); o.translate(cx, cy); o.rotate(.35 * tw);
+    for (let i = 0; i < 4; i++) { o.rotate(Math.PI / 2);
+      o.beginPath(); o.moveTo(0, -3 * tw); o.lineTo(L, 0); o.lineTo(0, 3 * tw); o.closePath(); o.fill(); }
+    o.restore();
+  }
+  o.globalCompositeOperation = 'source-over';
+
+  ctx.drawImage(off, 0, 0);
+
+  // grain
+  ctx.globalAlpha = 1;
+  ctx.fillStyle = ctx.createPattern(grain, 'repeat');
+  ctx.fillRect(0, 0, S, S);
+}
+
+Promise.all([load('ring.png'), load('loop.png')]).then(([r, l]) => {
+  ring = r; loop = l;
+  window.renderAt = render;
+  window.ready = true;
+  const q = new URLSearchParams(location.search);
+  if (q.has('t')) { render(parseFloat(q.get('t'))); return; }
+  const t0 = performance.now();
+  (function tick(n) { render((n - t0) / 1000); requestAnimationFrame(tick); })(t0);
+});
+</script>
+</body>
+</html>
